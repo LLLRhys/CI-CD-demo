@@ -7,8 +7,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
     - name: Checkout
@@ -21,9 +19,9 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_TOKEN }}
       
     - name: Build Docker Image
-      run: docker build -t cicd-demo:latest -t cicd-demo:${{ github.sha }} .
+      run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/cicd-demo:latest -t ${{ secrets.DOCKER_HUB_USERNAME }}/cicd-demo:${{ github.sha }} .
 
     - name: Push Docker Image
       run: |
-        docker push cicd-demo:latest
-        docker push cicd-demo:${{ github.sha }}
+        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/cicd-demo:latest
+        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/cicd-demo:${{ github.sha }}
