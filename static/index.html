@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CI/CD Demo</title>
+</head>
+<body>
+  <h1>CI/CD Demo Page</h1>
+  <button onclick="loadData()">请求后端</button>
+  <p id="result"></p>
+
+  <script>
+    function loadData() {
+      fetch('/api/hello')
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById('result').innerText = data;
+        });
+    }
+  </script>
+</body>
+</html>
